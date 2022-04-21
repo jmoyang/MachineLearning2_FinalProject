@@ -7,4 +7,5 @@ This repository holds Code and Presentation of Machine Learning 2 Final Group Pr
 * [GBM_Modle](GBM_Models.R)
 * [Lasso and Ridge With Log(Y)](ML_Final_Log(y)_(1).R)
 * [Lasso and Ridge With Original Y](ML_Final_Nolog.R)
+* [Random Forest](RFcode.R) 
 * [Link to the presentation](https://docs.google.com/presentation/d/1582SS_4qFDwfqr2Oub0wCa0TMDuN51RTOH_N72dEvDM/edit?usp=sharing)
