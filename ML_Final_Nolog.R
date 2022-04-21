@@ -25,6 +25,8 @@ No_log$Brand <- as.factor(No_log$Brand)
 str(No_log$Brand)
 No_log$color <- as.factor(No_log$color)
 str(No_log$color)
+No_log$model <- as.factor(No_log$model)
+str(No_log$model)
 
 
 #X and Y Variable 
@@ -51,14 +53,14 @@ ridge.mod<-glmnet(x[train, ], y[train], alpha =0, lambda = grid, thresh = 1e-12)
 # Cross Validation
 cv.out<-cv.glmnet(x[train, ], y[train], alpha=0)
 bestlam<-cv.out$lambda.min
-bestlam # 14.60722
+bestlam 
 
 # Predict using initial model, and best lambda
 ridge.pred<-predict(ridge.mod, s=bestlam, newx=x[test,])
 mse <- mean((ridge.pred-y[test])^2)
-mse # 21655.74
+mse 
 rmse <- sqrt(mse)
-rmse # 147.1589
+rmse 
 
 # Fit the Model Using Best Lambda Value 
 out <-glmnet(x,y,alpha=0)
@@ -70,9 +72,9 @@ plot(ridge.mod, xvar = "norm", label = TRUE)
 # Linear Model because lambda = 0
 lm.pred<-predict(ridge.mod, s=0, newx=x[test,], exact=T, x=x[train, ], y=y[train])
 mse <- mean((lm.pred-y[test])^2)
-mse #20556.83 Lower MSE than ridge model, but not by much.
+mse 
 rmse <- sqrt(mse)
-rmse #143.3765
+rmse 
 
 #########################################
 ########### LASSO REGRESSION  ########### --> Check if other variables are impactful but zeroing out
@@ -85,20 +87,19 @@ lasso.mod<-glmnet(x[train, ], y[train], alpha=1, lambda=grid)  # Alpha = 1 for L
 # Cross-Validation
 cv.out<-cv.glmnet(x[train, ], y[train], alpha=1)
 bestlam <- cv.out$lambda.min
-bestlam #0.04895759
+bestlam 
 
 # Predict using initial model, and best lambda
 lasso.pred<-predict(lasso.mod, s=bestlam,newx=x[test,])
 mse <- mean((lasso.pred-y[test])^2) 
-mse #20559.44
+mse 
 rmse <- sqrt(mse)
-rmse #143.3856
+rmse
 
 # Fit the Model Using Best Lambda Value
 out<-glmnet(x,y, alpha=1, lambda=grid)
 lasso.coef<-predict(out, type="coefficients", s=bestlam)
-lasso.coef #--> Most sizes, Brand and color has been eliminate, 
-           #    still high coef for models and color
+lasso.coef 
 
 plot(lasso.mod, xvar = "norm", label = TRUE)
 ########################################################################
