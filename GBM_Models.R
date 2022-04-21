@@ -45,7 +45,7 @@ counter <-0
 for (i in 1:4) {
   for (j in 1:5) {
     counter <- counter +1
-    boost<-gbm(Sale.Price~.-logged,
+    boost<-gbm(Sale.Price~.,
                data= dt[trainIndex,],
                distribution = "gaussian",
                n.trees = 500,
